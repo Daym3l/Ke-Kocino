@@ -1,12 +1,11 @@
-import { createMuiTheme } from '@material-ui/core/styles';
-import {cyan} from '@material-ui/core/colors';
+import { createMuiTheme } from "@material-ui/core/styles";
+import {  red,grey} from "@material-ui/core/colors";
 
- export const themeLogin = createMuiTheme({
+export const themeLogin = createMuiTheme({
   palette: {
-    primary: cyan,
+    primary: { main: grey[600] },
     secondary: {
-      main: '#f44336',
-    },
-  },
+      main: red[400]
+    }
+  }
 });
-

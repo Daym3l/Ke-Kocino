@@ -18,8 +18,25 @@ import NotesIcon from "@material-ui/icons/Assistant";
 
 const useStyles = makeStyles(loginStyles);
 
-const LoginView = () => {
+const LoginView = props => {
   const classes = useStyles();
+  const { history } = props;
+
+  const [loginData, setLoginData] = React.useState({ email: "", password: "" });
+  function handlerTextChange(e) {
+    setLoginData({ ...loginData, [e.target.name]: e.target.value });
+  }
+
+  function login() {
+    if (
+      loginData.email === "webmaster@coreplus.com" &&
+      loginData.password === "123"
+    ) {
+      history.replace("/notes");
+    } else {
+      history.replace("/");
+    }
+  }
   return (
     <div className={classes.root}>
       <Container component="main" maxWidth="xs">
@@ -41,6 +58,7 @@ const LoginView = () => {
               label="Email Address"
               name="email"
               autoComplete="email"
+              onChange={handlerTextChange}
               autoFocus
             />
             <TextField
@@ -52,6 +70,7 @@ const LoginView = () => {
               label="Password"
               type="password"
               id="password"
+              onChange={handlerTextChange}
               autoComplete="current-password"
             />
             <FormControlLabel
@@ -62,8 +81,9 @@ const LoginView = () => {
               type="submit"
               fullWidth
               variant="contained"
-              color="primary"
+              color="secondary"
               className={classes.button}
+              onClick={login}
             >
               Sign In
             </Button>
