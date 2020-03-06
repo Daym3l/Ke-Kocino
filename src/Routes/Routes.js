@@ -1,5 +1,5 @@
 import Login from "../views/login/Login.view";
-import Notes from "../views/Notes/Notes.container";
+import Notes from "../views/Notes/Notes.layout";
 
 const ROUTES = [
   { path: "/", name: "Login", component: Login },
