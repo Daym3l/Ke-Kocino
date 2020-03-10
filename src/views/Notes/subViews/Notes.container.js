@@ -1,20 +1,53 @@
 import React from "react";
-import { StateNotes } from "../Notes.store";
+import Note from "./Note";
 import Axios from "axios";
+import { GridList, GridListTile } from "@material-ui/core";
+import { makeStyles } from "@material-ui/core/styles";
 
+const useStyles = makeStyles(theme => ({
+  root: {   
+    flexWrap: "wrap",
+    padding:10,
+    justifyContent: "space-around",
+    overflow: "hidden",
+   
+  },
+
+}));
 
 export const NotesContainer = () => {
-  const { state, dispatch } = React.useContext(StateNotes);
+  const [notes, setNotes] = React.useState([]);
+  const classes = useStyles();
+
+  async function fetchData() {
+    const res = await Axios.get("/Notes");
+    if (res.status === 200) {
+      setNotes(res.data);
+    }
+  }
+  async function deleteNote(id) {
+    const res = await Axios.delete(`/Notes/${id}`);
+    if (res.status === 200) {
+      fetchData();
+    }
+  }
 
   React.useEffect(() => {
-    async function fetchData(params) {
-      const res = await Axios.get("/Notes");
-      console.log(res);
-    }
     fetchData();
   }, []);
 
-  return <div></div>;
+  return (
+    <div className={classes.root}>
+      <GridList cellHeight={160} cols={4}>
+        {notes.length > 0 &&
+          notes.map(item => (
+            <GridListTile key={item.id} cols={1}>
+              <Note note={item} handlerDelete={deleteNote} />
+            </GridListTile>
+          ))}
+      </GridList>
+    </div>
+  );
 };
 
 export default NotesContainer;
