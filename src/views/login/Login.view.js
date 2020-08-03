@@ -32,7 +32,7 @@ const LoginView = props => {
       loginData.email === "webmaster@coreplus.com" &&
       loginData.password === "123"
     ) {
-      history.replace("/notes");
+      history.replace("/query");
     } else {
       history.replace("/");
     }

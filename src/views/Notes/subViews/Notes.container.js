@@ -3,7 +3,7 @@ import Note from "./Note";
 import Axios from "axios";
 import { GridList, GridListTile } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
-
+import Websocket from 'react-websocket';
 const useStyles = makeStyles(theme => ({
   root: {   
     flexWrap: "wrap",
@@ -37,7 +37,7 @@ export const NotesContainer = () => {
   }, []);
 
   return (
-    <div className={classes.root}>
+    <div className={classes.root}>      
       <GridList cellHeight={160} cols={4}>
         {notes.length > 0 &&
           notes.map(item => (
