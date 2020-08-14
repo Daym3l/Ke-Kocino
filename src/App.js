@@ -1,32 +1,41 @@
 import React from "react";
 import "./App.css";
-import { BrowserRouter, Route, Switch, Redirect } from "react-router-dom";
+import { BrowserRouter, Switch, Redirect } from "react-router-dom";
 import ROUTES from "./Routes/Routes";
 import { ThemeProvider } from "@material-ui/core/styles";
-import { themeLogin } from "./theme/login.theme";
-import axios from "axios";
-import { NotesProviders } from "./views/Notes/Notes.store";
-
-axios.defaults.baseURL = "http://localhost:1862/api";
-axios.defaults.headers.common["Access-Control-Allow-Origin"] = "*";
+import theme from "./theme";
+import RouteWithLayout from "./components/RouteWithLayout/RouteWithLayout";
+import { SnackbarProvider } from "notistack";
 
 class App extends React.Component {
   render() {
     return (
-      <ThemeProvider theme={themeLogin}>
-        <NotesProviders>
+      <ThemeProvider theme={theme}>
+        <SnackbarProvider
+          maxSnack={3}
+          anchorOrigin={{
+            vertical: "top",
+            horizontal: "right"
+          }}
+        >
           <BrowserRouter>
             <Switch>
               {ROUTES.map((_route, key) => {
-                const { path, component } = _route;
+                const { path, component, layout } = _route;
                 return (
-                  <Route exact path={path} key={key} component={component} />
+                  <RouteWithLayout
+                    exact
+                    path={path}
+                    key={key}
+                    component={component}
+                    layout={layout}
+                  />
                 );
               })}
               <Redirect from="**" to="/" />
             </Switch>
           </BrowserRouter>
-        </NotesProviders>
+        </SnackbarProvider>
       </ThemeProvider>
     );
   }

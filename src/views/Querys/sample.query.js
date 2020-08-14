@@ -2,7 +2,7 @@ import React from "react";
 
 import { useQuery } from "react-query";
 
-const SampleQuery = () => {
+function SampleQuery() {
   const { isLoading, error, data } = useQuery("repoData", async () => {
     const res = await fetch(
       "https://api.github.com/repos/tannerlinsley/react-query"
@@ -35,6 +35,6 @@ const SampleQuery = () => {
       )}
     </div>
   );
-};
+}
 
 export default SampleQuery;

@@ -18,7 +18,7 @@ const Loading = props => {
     <React.Fragment>
       <Backdrop open={blocking} className={classes.backdrop}>
         <CircularProgress color="inherit" />
-        <label className={classes.label}>Waiting...</label>
+        <label className={classes.label}>Cargando...</label>
       </Backdrop>
     </React.Fragment>
   );
