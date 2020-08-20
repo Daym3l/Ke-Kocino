@@ -191,8 +191,8 @@ const LoginView = ({ history, enqueueSnackbar, location }) => {
   }, [formState.values]);
 
   React.useEffect(() => {
-    if (usuario && location.pathname === "/") {
-      logout();
+    if (usuario) {
+      history.push("/kekocino/query");
     }
   }, [history, usuario]);
 
@@ -207,7 +207,7 @@ const LoginView = ({ history, enqueueSnackbar, location }) => {
       .then(res => {
         setLoading(false);
         if (res) {
-          history.push("/query");
+          history.push("/");
         }
       })
       .catch(error => {
@@ -226,7 +226,7 @@ const LoginView = ({ history, enqueueSnackbar, location }) => {
       .then(res => {
         setLoading(false);
         if (res) {
-          history.push("/query");
+          history.push("/");
         }
       })
       .catch(error => {
@@ -307,7 +307,6 @@ const LoginView = ({ history, enqueueSnackbar, location }) => {
                 <TextField
                   className={classes.textField}
                   error={hasError("password")}
-                  
                   fullWidth
                   helperText={
                     hasError("password") ? formState.errors.password : null
