@@ -1,2 +1,2 @@
-# React-Notes-App
-Creates and store your notes.
+# Ke-kocino
+in construction
